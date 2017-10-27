@@ -1,6 +1,6 @@
 {
   "name": "tick-of-truth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Inline validation of forms using javascript",
   "main": "tick-of-truth.js",
   "scripts": {
