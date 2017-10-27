@@ -1,0 +1,22 @@
+{
+  "name": "tick-of-truth",
+  "version": "1.0.0",
+  "description": "Inline validation of forms using javascript",
+  "main": "tick-of-truth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liam-betsworth/tick_of_truth.git"
+  },
+  "keywords": [
+    "validation"
+  ],
+  "author": "Lewis Campbell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liam-betsworth/tick_of_truth/issues"
+  },
+  "homepage": "https://github.com/liam-betsworth/tick_of_truth#readme"
+}
