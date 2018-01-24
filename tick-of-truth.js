@@ -236,11 +236,11 @@ function ValidationRules(selector, validator) {
         return this.validator.check();
     }
   
-    this.true = function() {
+    this.pass = function() {
         return this.validator.check(true);
     }
   
-    this.false = function() {
+    this.fail = function() {
         return this.validator.check(false);
     }
 }
