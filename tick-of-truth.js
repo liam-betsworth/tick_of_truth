@@ -1,8 +1,10 @@
 function ValidationRules(selector, validator) {
     this.validator = validator
     this.selector = selector;
+    this._error = undefined;
     this._is = [];
     this._not = [];
+    this._isSameAs = [];
     this._isRegex = [];
     this._notRegex = [];
     this._isChecked = undefined;
@@ -76,6 +78,11 @@ function ValidationRules(selector, validator) {
         this._isChecked = true;
         return this;
     }
+
+    this.isSameAs = function(selector) {
+        this._isSameAs.push(selector);
+        return this;
+    }
   
     this.maxLength = function(length) {
         this.length.lt = length;
@@ -87,7 +94,7 @@ function ValidationRules(selector, validator) {
         return this;
     }
   
-    this.equalLength = function(length) {
+    this.isLength = function(length) {
         this.length.eq = length;
         return this;
     }
@@ -97,7 +104,7 @@ function ValidationRules(selector, validator) {
     }
   
     //Returns true if valid, false if not
-    this.check = function() {
+    this.checks = function() {
         var nodes = document.querySelectorAll(this.selector).length;
 
         if (nodes > 0) {
@@ -116,6 +123,9 @@ function ValidationRules(selector, validator) {
             if (!this.validateChecked()) {
                 return false;
             }
+            if (!this.validateIsSameAs()) {
+                return false;
+            }
             if (!this.validateLength()) {
                 return false;
             }
@@ -125,6 +135,12 @@ function ValidationRules(selector, validator) {
             return false;
         }
     }
+
+    this.error = function(selector) {
+        this._error = selector;
+        return this;
+    }
+
     //Loops through each not value, if all nots are matched, it will return true, if any not fails, it returns false
     this.validateNots = function() {
         var value = document.querySelector(this.selector).value;
@@ -154,7 +170,7 @@ function ValidationRules(selector, validator) {
   
     this.validateNotReg = function() {
         var value = document.querySelector(this.selector).value;
-        for (var i = 0; i < this._notRegex.length;i++) {
+        for (var i = 0; i < this._notRegex.length; i++) {
             if (this._notRegex[i].test(value)) {
                 return false;
             }
@@ -164,12 +180,25 @@ function ValidationRules(selector, validator) {
 
     this.validateChecked = function() {
         var checked = document.querySelectorAll(this.selector + ":checked");
-        if (this._isChecked && checked.length > 0) {
-            return true;
-        } else if (!this._isChecked) {
-            return true;
+        if (this._isChecked) {
+            if (checked.length > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        return false;
+        return true;
+    }
+
+    this.validateIsSameAs = function() {
+        var value = document.querySelector(this.selector).value;
+        for (var i = 0; i < this._isSameAs.length; i++) {
+            var sameAs = document.querySelector(this._isSameAs[i]).value;
+            if (value !== sameAs) {
+                return false;
+            }
+        }
+        return true;
     }
   
     this.validateLength = function() {
@@ -192,27 +221,31 @@ function ValidationRules(selector, validator) {
         return true;
     }
   
-    this.error = function() {
-        $(this.selector).closest('.form-group').addClass('error');
-        $(this.selector).parent().find('.label-error').show();
+    this.showError = function() {
+        if (this._error) {
+            $('.error-summary').show();
+            $(this._error).show();
+            $(this.selector).closest('.form-group').addClass('error');
+        } else {
+            $(this.selector).closest('.form-group').addClass('error');
+            $(this.selector).parent().find('.label-error').show();
+        }
     }
-  
-    this.removeError = function() {
-        $(this.selector).closest('.form-group').removeClass('error');
-        $(this.selector).parent().find('.label-error').hide();
-    }
-  
-    this.true = function() {
+
+    this.result = function() {
         return this.validator.check();
     }
   
-    this.false = function() {
-        return !this.validator.check();
-    }
-  }
+    // this.true = function() {
+    //     return this.validator.check();
+    // }
   
+    // this.false = function() {
+    //     return !this.validator.check();
+    // }
+}
   
-  function validate(id) {
+function validate(id) {
     if (id) {
         if (window === this) {
             return new validate(id);
@@ -224,9 +257,9 @@ function ValidationRules(selector, validator) {
     } else {
         console.error("Provide a selector e.g. 'validate(\"#email\")");
     }
-  }
+}
   
-  validate.prototype = {
+validate.prototype = {
     _rules: [],
     
     watch: function(selector) {
@@ -238,13 +271,20 @@ function ValidationRules(selector, validator) {
     check: function() {
         var passed = true;
         for (var i = 0; i < this._rules.length;i++) {
-            if (!this._rules[i].check()) {
-                this._rules[i].error();
+            if (!this._rules[i].checks()) {
+                this._rules[i].showError();
                 passed = false;
             } else {
-                this._rules[i].removeError();
+                // this._rules[i].hideError();
             }
         }
         return passed;
+    },
+
+    resetErrors: function() {
+        $('.error-summary').hide();
+
+        $('.form-group').closest('.form-group').removeClass('error');
+        $('.label-error').hide();
     }
 }
