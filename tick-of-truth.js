@@ -236,13 +236,13 @@ function ValidationRules(selector, validator) {
         return this.validator.check();
     }
   
-    // this.true = function() {
-    //     return this.validator.check();
-    // }
+    this.true = function() {
+        return this.validator.check(true);
+    }
   
-    // this.false = function() {
-    //     return !this.validator.check();
-    // }
+    this.false = function() {
+        return this.validator.check(false);
+    }
 }
   
 function validate(id) {
@@ -268,10 +268,14 @@ validate.prototype = {
         return valRule;
     },
   
-    check: function() {
+    check: function(trueFalse) {
+        if (trueFalse == undefined) {
+            trueFalse = true;
+        }
+
         var passed = true;
         for (var i = 0; i < this._rules.length;i++) {
-            if (!this._rules[i].checks()) {
+            if (trueFalse !== this._rules[i].checks()) {
                 this._rules[i].showError();
                 passed = false;
             } else {
