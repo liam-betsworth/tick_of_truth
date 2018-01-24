@@ -166,6 +166,8 @@ function ValidationRules(selector, validator) {
         var checked = document.querySelectorAll(this.selector + ":checked");
         if (this._isChecked && checked.length > 0) {
             return true;
+        } else if (!this._isChecked) {
+            return true;
         }
         return false;
     }
