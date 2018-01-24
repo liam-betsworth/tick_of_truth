@@ -1,3 +1,4 @@
+
 # tick_of_truth
 
 Javascript library that offers inline validation for web forms.
@@ -9,60 +10,76 @@ Javascript library that offers inline validation for web forms.
 ### Include the library
 
 ```
-<script src="tick-of-truth.js"></script>
+<script src="tick_of_truth.js"></script>
 ```
 
-### Basic syntax
-
-#### Building a rule
+### Building a rule
 
 ```
 validate(".selector").isEmail();
 ```
 
-#### Chaining validation rules
+### Chaining validation rules
 
 ```
 validate(".selector").isEmail().isNot('example@email.com');
 ```
 
-#### Validating multiple fields
+### Validating multiple fields
 
 ```
 validate("#selector1").isEmail().validate("#selector2").isPhone();
 ```
 
-#### Evaluation
+### Evaluation
 
-###### check()
+#### result()
 
-Returns true or false depending on the result of the evaluation.
-
-```
-var rule = validate("#selector").isEmail();
-rule.check();
-```
-
-###### true() & false()
-
-
+Returns true (pass) or false (fail) depending on the result of the evaluation.
 
 ```
 var rule = validate("#selector").isEmail();
+rule.result();
 
-if (rule.true()) {
-    // Is a valid email
-} else if (rule.false()) {
-    // Is not a valid email
-}
+-> true/false
+```
+
+#### pass()
+
+Returns true (pass) or false (fail) depending on the result of the evaluation.
+
+```
+var rule = validate("#selector").isEmail();
+rule.pass();
+
+-> true/false
+```
+
+#### fail()
+
+Returns true (fail) or false (pass) depending on the result of the evaluation.
+
+```
+var rule = validate("#selector").isEmail();
+rule.fail();
+
+-> true/false
 ```
 
 ### Validation rules
 
 #### is()
 
+exact value match
+
 ```
-validate(".selector").is();
+validate("#name").is("Liam");
+```
+
+#### isNot()
+
+```
+validate(".selector").isNot("something");
 ```
 
 #### isEmpty()
@@ -71,22 +88,20 @@ validate(".selector").is();
 validate(".selector").isEmpty();
 ```
 
-#### isNot()
-
-```
-validate(".selector").isNot();
-```
-
 #### isRegEx()
 
+Create your own regular expression to check against.
+
 ```
-validate(".selector").isRegEx();
+validate(".selector").isRegEx(/^[0-9]{6}$/);
 ```
 
 #### isNotRegEx()
 
+Create your own regular expression to avoid.
+
 ```
-validate(".selector").isNotRegEx();
+validate(".selector").isNotRegEx(/^[0-9]{6}$/);
 ```
 
 #### isPhone()
@@ -137,3 +152,20 @@ validate(".selector").isNotEmpty();
 validate(".selector").isChecked();
 ```
 
+#### isLength()
+
+```
+validate(".selector").isLength(4);
+```
+
+#### minLength()
+
+```
+validate(".selector").minLength(2);
+```
+
+#### maxLength()
+
+```
+validate(".selector").maxLength(6);
+```
