@@ -20,7 +20,7 @@ var testCase = validate("#password")
                  .isMinLength(8)
                  .isMaxLength(24);
 
-testCase.evaluate();
+testCase.result();
 -> true/false
 ```
 
@@ -84,7 +84,8 @@ test.fail();
 Returns true if the value of the selector is the same as the supplied value.
 
 ```
-validate("#name").is("Liam");
+validate("#name")
+  .is("Liam");
 ```
 
 ### isChecked()
@@ -92,7 +93,8 @@ validate("#name").is("Liam");
 Returns true if the selector has at least one checked radio or checkbox.
 
 ```
-validate("input[name=radio-button-group]").isChecked();
+validate("input[name=radio-button-group]")
+  .isChecked();
 ```
 
 ### isDrivingLicence()
@@ -100,7 +102,8 @@ validate("input[name=radio-button-group]").isChecked();
 Returns true if the value of the selector matches is a correctly formatted driving licence number.
 
 ```
-validate("#driving-licence).isDrivingLicence();
+validate("#driving-licence)
+  .isDrivingLicence();
 ```
 
 ### isEmail()
@@ -108,7 +111,8 @@ validate("#driving-licence).isDrivingLicence();
 Returns true if the value of the selector is a correctly formatted email address.
 
 ```
-validate(".selector").isEmail();
+validate("#email")
+  .isEmail();
 ```
 
 ### isEmpty()
@@ -116,7 +120,8 @@ validate(".selector").isEmail();
 Returns true if the value of the selector is empty.
 
 ```
-validate(".selector").isEmpty();
+validate("#field")
+  .isEmpty();
 ```
 
 ### isInteger()
@@ -124,7 +129,8 @@ validate(".selector").isEmpty();
 Returns true if the value of the selector is an integer (whole number).
 
 ```
-validate(".selector").isInteger();
+validate("#number")
+  .isInteger();
 ```
 
 ### isLength(Number: length)
@@ -132,7 +138,8 @@ validate(".selector").isInteger();
 Returns true if the length of the selector value matches the supplied length.
 
 ```
-validate(".selector").isLength(4);
+validate("#code")
+  .isLength(4);
 ```
 
 ### isMinLength(Number: length)
@@ -140,7 +147,8 @@ validate(".selector").isLength(4);
 Returns true if the length of the selector value is greater than the supplied length.
 
 ```
-validate(".selector").minLength(2);
+validate("#password)
+  .minLength(2);
 ```
 
 ### isMaxLength(Number: length)
@@ -148,7 +156,8 @@ validate(".selector").minLength(2);
 Returns true if the length of the selector value is less than the supplied length.
 
 ```
-validate(".selector").maxLength(6);
+validate("#password")
+  .maxLength(24);
 ```
 
 ### isNot(any: value)
@@ -156,7 +165,8 @@ validate(".selector").maxLength(6);
 Returns true if the value of the selector is not the same as the supplied value.
 
 ```
-validate("#phone").isNot("999");
+validate("#phone")
+  .isNot("999");
 ```
 
 ### isNotEmpty()
@@ -164,7 +174,8 @@ validate("#phone").isNot("999");
 Returns true if the value of the selector is not empty.
 
 ```
-validate("#some-field").isNotEmpty();
+validate("#some-field")
+  .isNotEmpty();
 ```
 
 ### isNotRegEx(RegExp: expression)
@@ -172,7 +183,8 @@ validate("#some-field").isNotEmpty();
 Returns true if the value of the selector does not match the supplied expression.
 
 ```
-validate("#value").isNotRegEx(/^[0-9]{6}$/);
+validate("#value")
+  .isNotRegEx(/^[0-9]{6}$/);
 ```
 
 ### isNumber()
@@ -180,7 +192,8 @@ validate("#value").isNotRegEx(/^[0-9]{6}$/);
 Returns true if the value of the selector is any kind of number.
 
 ```
-validate("#price").isNumber();
+validate("#price")
+  .isNumber();
 ```
 
 ### isPhone()
@@ -188,7 +201,8 @@ validate("#price").isNumber();
 Returns true if the value of the selector is a correctly formatted phone number.
 
 ```
-validate("#phone-number").isPhone();
+validate("#phone-number")
+  .isPhone();
 ```
 
 ### isPostcode()
@@ -196,7 +210,8 @@ validate("#phone-number").isPhone();
 Returns true if the value of the selector is a correctly formatted postcode.
 
 ```
-validate("#postode").isPostcode();
+validate("#postode")
+  .isPostcode();
 ```
 
 ### isRegEx(RegExp: expression)
@@ -204,5 +219,15 @@ validate("#postode").isPostcode();
 Returns true if the value of the selector matches the supplied expression.
 
 ```
-validate("#six-numbers").isRegEx(/^[0-9]{6}$/);
+validate("#six-digits")
+  .isRegEx(/^[0-9]{6}$/);
+```
+
+### isSameAs(String: selector)
+
+Returns true if the value of the primary selector matches the value of the secondary selector.
+
+```
+validate("#email")
+  .isSameAs("#email-confirmation");
 ```
