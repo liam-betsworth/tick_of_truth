@@ -276,10 +276,14 @@ validate.prototype = {
         var passed = true;
         for (var i = 0; i < this._rules.length;i++) {
             if (trueFalse !== this._rules[i].checks()) {
-                this._rules[i].showError();
+                // this._rules[i].showError();
                 passed = false;
             } else {
                 // this._rules[i].hideError();
+            }
+
+            if (!this._rules[i].checks()) {
+                this._rules[i].showError();
             }
         }
         return passed;
