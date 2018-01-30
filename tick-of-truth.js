@@ -335,6 +335,7 @@ validate.prototype = {
 
     resetErrors: function() {
         $('.error-summary').hide();
+        $('.error-summary .error-list li').hide();
 
         $('.form-group').removeClass('error');
         $('.form-group').removeClass('form-group-error');
