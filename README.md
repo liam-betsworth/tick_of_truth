@@ -99,9 +99,37 @@ validate("#email")
   .result();
 ```
 
+If you use an `.error-summary` at the top of the page, the `.error-summary` will automatically appear if any error is triggered within the page. By using an error with the same class in both the `.error-summary` and `.form-group`, both errors will show. for example,
+
+```
+<div class="error-summary">
+  <div class="error-title">There was a problem</div>
+  <ul class="error-list">
+    <li class="email-invalid"><a href="#">Provide a valid email</a></li>
+  </ul>
+</div>
+
+<div class="form-group">
+  <label for="email">
+    <div class="label-title">Email address</div>
+    <div class="label-error email-invalid">Provide a valid email</div>
+    <input type="text" id="email" class="form-control form-control-1-2" />
+  </label>
+</div>
+...
+<script>
+  function submit() {
+    validate("#email")
+      .isEmail()
+      .error('.email-invalid')
+      .result();
+  }
+</script>
+```
+
 ### Reset errors
 
-If the errors need to be reset and hidden for resubmission of a form, use the `resetErrors()` function. 
+If errors need to be reset and hidden for resubmission of a form, use the `resetErrors()` function. This will hide every `.error-summary`, `.label-error` and `.legend-error`.
 
 ```
 validate.prototype.resetErrors();

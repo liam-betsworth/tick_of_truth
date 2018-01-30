@@ -229,6 +229,7 @@ function ValidationRules(selector, validator) {
         } else {
             $(this.selector).closest('.form-group').addClass('error');
             $(this.selector).parent().find('.label-error').show();
+            $(this.selector).parent().find('.legend-error').show();
         }
     }
 
@@ -294,5 +295,6 @@ validate.prototype = {
 
         $('.form-group').closest('.form-group').removeClass('error');
         $('.label-error').hide();
+        $('.legend-error').hide();
     }
 }
