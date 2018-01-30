@@ -146,6 +146,15 @@ validate("#name")
   .is("Liam");
 ```
 
+### isAlphaNumeric()
+
+Returns true if the value of the selector contains only letters and numbers.
+
+```
+validate("#field")
+  .isAlphaNumeric();
+```
+
 ### isChecked()
 
 Returns true if the selector has at least one checked radio or checkbox.
@@ -182,6 +191,15 @@ validate("#field")
   .isEmpty();
 ```
 
+### isGreaterThan(Number: limit)
+
+Returns true if the value of the selector is greater than the supplied limit.
+
+```
+validate("#number")
+  .isGreaterThan(0);
+```
+
 ### isInteger()
 
 Returns true if the value of the selector is an integer (whole number).
@@ -198,6 +216,15 @@ Returns true if the length of the selector value matches the supplied length.
 ```
 validate("#code")
   .isLength(4);
+```
+
+### isLessThan(Number: limit)
+
+Returns true if the value of the selector is less than the supplied limit.
+
+```
+validate("#number")
+  .isLessThan(100);
 ```
 
 ### isMinLength(Number: length)
@@ -288,4 +315,13 @@ Returns true if the value of the primary selector matches the value of the secon
 ```
 validate("#email")
   .isSameAs("#email-confirmation");
+```
+
+### isVIN()
+
+Returns true if the value of the selector is a correctly formatted Vehicle Identification Number.
+
+```
+validate("#vin")
+  .isVIN();
 ```

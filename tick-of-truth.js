@@ -12,7 +12,11 @@ function ValidationRules(selector, validator) {
         lt: undefined,
         gt: undefined,
         eq: undefined
-    }
+    };
+    this.range = {
+        lt: undefined,
+        gt: undefined
+    };
   
     this.isNot = function(value) {
         this._not.push(value);
@@ -84,12 +88,12 @@ function ValidationRules(selector, validator) {
         return this;
     }
   
-    this.maxLength = function(length) {
+    this.isMaxLength = function(length) {
         this.length.lt = length;
         return this;
     }
   
-    this.minLength = function(length) {
+    this.isMinLength = function(length) {
         this.length.gt = length;
         return this;
     }
@@ -98,7 +102,27 @@ function ValidationRules(selector, validator) {
         this.length.eq = length;
         return this;
     }
-  
+
+    this.isLessThan = function(range) {
+        this.range.lt = range;
+        return this;
+    }
+    
+    this.isGreaterThan = function(range) {
+        this.range.gt = range;
+        return this;
+    }
+
+    this.isVIN = function() {
+        this.isRegEx(/^[a-zA-Z0-9\/\.\-\* ]{20}$/);
+        return this;
+    }
+
+    this.isAlphaNumeric = function() {
+        this.isRegEx(/^[a-zA-Z0-9]$/);
+        return this;
+    }
+    
     this.validate = function(selector) {
         return this.validator.watch(selector);
     }
@@ -127,6 +151,9 @@ function ValidationRules(selector, validator) {
                 return false;
             }
             if (!this.validateLength()) {
+                return false;
+            }
+            if (!this.validateRange()) {
                 return false;
             }
             return true;
@@ -215,6 +242,21 @@ function ValidationRules(selector, validator) {
         }
         if (this.length.eq) {
             if (!(value.length === this.length.eq)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    this.validateRange = function() {
+        var value = document.querySelector(this.selector).value;
+        if (this.range.lt) {
+            if (!(value < this.range.lt)) {
+                return false;
+            }
+        }
+        if (this.range.gt) {
+            if (!(value > this.range.gt)) {
                 return false;
             }
         }
