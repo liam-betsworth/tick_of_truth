@@ -81,11 +81,11 @@ test.fail();
 
 During evaluation, if a test case is not met, the library will look for the parent `.form-group` and add an `.error` class to it. This will add a red bar to the left of the `.form-group` and highlight the `input` in red.
 
-If a `.label-error` or `.legend-error` exists within the `.form-group`, it will be shown automatically, presenting the error to the user.
+If a `.label-error`, `.legend-error` or `.error-message` exists within the `.form-group`, it will be shown automatically, presenting the error to the user.
 
 ### error(String: selector)
 
-If a `.form-group` has more than one `.label-error` or `.legend-error`, you may want to show a specific error for different test cases. Using the `error(String: selector)` function, you can specify which selector should be made visible.
+If a `.form-group` has more than one `.label-error`, `.legend-error` or `.error-message`, you may want to show a specific error for different test cases. Using the `error(String: selector)` function, you can specify which selector should be made visible.
 
 ```
 validate("#email")
@@ -129,7 +129,7 @@ If you use an `.error-summary` at the top of the page, the `.error-summary` will
 
 ### Reset errors
 
-If errors need to be reset and hidden for resubmission of a form, use the `resetErrors()` function. This will hide every `.error-summary`, `.label-error` and `.legend-error`.
+If errors need to be reset and hidden for resubmission of a form, use the `resetErrors()` function. This will hide every `.error-summary`, `.label-error`, `.legend-error` and `.error-message`.
 
 ```
 validate.prototype.resetErrors();

@@ -225,11 +225,12 @@ function ValidationRules(selector, validator) {
         if (this._error) {
             $('.error-summary').show();
             $(this._error).show();
-            $(this.selector).closest('.form-group').addClass('error');
+            $(this.selector).closest('.form-group').addClass('error form-group-error');
         } else {
-            $(this.selector).closest('.form-group').addClass('error');
+            $(this.selector).closest('.form-group').addClass('error form-group-error');
             $(this.selector).parent().find('.label-error').show();
             $(this.selector).parent().find('.legend-error').show();
+            $(this.selector).parent().find('.error-message').show();
         }
     }
 
@@ -293,7 +294,8 @@ validate.prototype = {
     resetErrors: function() {
         $('.error-summary').hide();
 
-        $('.form-group').closest('.form-group').removeClass('error');
+        $('.form-group').removeClass('error');
+        $('.form-group').removeClass('form-group-error');
         $('.label-error').hide();
         $('.legend-error').hide();
     }
