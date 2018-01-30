@@ -204,12 +204,12 @@ function ValidationRules(selector, validator) {
     this.validateLength = function() {
         var value = document.querySelector(this.selector).value;
         if (this.length.lt) {
-            if (!(value.length < this.length.lt)) {
+            if (!(value.length <= this.length.lt)) {
                 return false;
             }
         }
         if (this.length.gt) {
-            if (!(value.length > this.length.gt)) {
+            if (!(value.length >= this.length.gt)) {
                 return false;
             }
         }
