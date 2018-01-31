@@ -15,8 +15,13 @@ function ValidationRules(selector, validator) {
     };
     this.range = {
         lt: undefined,
-        gt: undefined
+        lteq: undefined,
+        gt: undefined,
+        gteq: undefined
     };
+
+
+
   
     this.isNot = function(value) {
         this._not.push(value);
@@ -107,9 +112,19 @@ function ValidationRules(selector, validator) {
         this.range.lt = range;
         return this;
     }
+
+    this.isLessThanOrEqual = function(range) {
+        this.range.lteq = range;
+        return this;
+    }
     
     this.isGreaterThan = function(range) {
         this.range.gt = range;
+        return this;
+    }
+    
+    this.isGreaterThanOrEqual = function(range) {
+        this.range.gteq = range;
         return this;
     }
 
@@ -255,8 +270,18 @@ function ValidationRules(selector, validator) {
                 return false;
             }
         }
+        if (this.range.lteq) {
+            if (!(value <= this.range.lteq)) {
+                return false;
+            }
+        }
         if (this.range.gt) {
             if (!(value > this.range.gt)) {
+                return false;
+            }
+        }
+        if (this.range.gteq) {
+            if (!(value >= this.range.gteq)) {
                 return false;
             }
         }

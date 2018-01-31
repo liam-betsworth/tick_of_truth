@@ -200,6 +200,15 @@ validate("#number")
   .isGreaterThan(0);
 ```
 
+### isGreaterThanOrEqual(Number: limit)
+
+Returns true if the value of the selector is greater than or equal to the supplied limit.
+
+```
+validate("#number")
+  .isGreaterThanOrEqual(0);
+```
+
 ### isInteger()
 
 Returns true if the value of the selector is an integer (whole number).
@@ -225,6 +234,15 @@ Returns true if the value of the selector is less than the supplied limit.
 ```
 validate("#number")
   .isLessThan(100);
+```
+
+### isLessThanOrEqual(Number: limit)
+
+Returns true if the value of the selector is less than or equal to the supplied limit.
+
+```
+validate("#number")
+  .isLessThanOrEqual(100);
 ```
 
 ### isMinLength(Number: length)
